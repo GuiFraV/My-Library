@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favBook.ico">
+    <link rel="stylesheet" href="style.css">
+    <title>My Library</title>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1>Library</h1>
+            <nav>
+                <img src="git.svg" alt="git hub logo">
+                <a href="https://github.com/GuiFraV" target=_blank >Git Hub</a>
+            </nav>
+        </div>      
+    </header>
+
+    <main class="mainContener">
+        <button class="glow-on-hover" type="button">+ Add Book</button>
+        <div class="bookGrid">
+            <!--Footer Here because of relative and absolute position to move footer 
+            when there are another implicite row   -->
+            <footer>
+                <h3>Copyright © 2022 Library Made by GuiFraV inspired by 
+                    <a href="https://michalosman.github.io/library/" target=_blank >michalosman</a> - Thank you &#128536
+                </h3>
+            </footer>
+        </div>
+    </main>
+
+    <div class="modal">
+       <form action="#" class="modalCard">
+        <h2>Add new book</h2>
+        <input id="title" type="text" placeholder="Title" >
+        <input id='author' type="text" placeholder="Author" >
+        <input id="pages" type="number" placeholder="Number of pages" >
+        <div id="read">
+            <label for="check">Have you read it ?</label>
+            <input id='check' type="checkbox" name="check" id="check">
+        </div>
+        <button class="submit" type="button">Submit</button>
+       </form>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
