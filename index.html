@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="favBook.ico">
     <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+    <script src="localStorage.js" defer></script>
     <title>My Library</title>
 </head>
 <body>
@@ -24,9 +26,9 @@
         <button class="glow-on-hover" type="button">+ Add Book</button>
         <div class="bookGrid">
             <!--Footer Here because of relative and absolute position to move footer 
-            when there are another implicite row   -->
+            when there are another implicite row appear   -->
             <footer>
-                <h3>Copyright © 2022 Library Made by GuiFraV inspired by 
+                <h3>Copyright © 2022 Library Made by GuiFraV design inspired by 
                     <a href="https://michalosman.github.io/library/" target=_blank >michalosman</a> - Thank you &#128536
                 </h3>
             </footer>
@@ -47,6 +49,9 @@
        </form>
     </div>
 
-    <script src="app.js"></script>
+    <div class="shiftMode">
+        <p>Dark</p>
+    </div>
+
 </body>
 </html>

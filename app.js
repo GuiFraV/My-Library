@@ -53,7 +53,6 @@ function buttonBook(event){
         e.innerHTML = 'Not read yet';
         e.classList.add('readingYet');
         e.classList.remove('reading');
-        console.log('do something');
     } else if (e.classList[0] == 'readingYet') {
         e.innerHTML = 'Read';
         e.classList.add('reading');
@@ -99,46 +98,52 @@ function addBookToLibrary() {
     let newbook = new Book(title, author, pages, read);
     myLibrary.push(newbook);
 
-    // Slice Method to get the last book object in myLibrary
-    let lastBook = myLibrary.slice(-1);
+    // Add book in localStorage
+    addBook({title, author, pages, read});
+    getBook();
+}
+
+function getBook(){
+
+      // Slice Method to get the last book object in myLibrary
+      let lastBook = myLibrary.slice(-1);
     
-    // Creating new HTML attributs for display the new Book
-    // With CSS class
-    const bookDiv = document.createElement("div");
-    bookDiv.classList.add('gridBook');
-
-    const bookTitle = document.createElement('p');
-    bookTitle.innerText = lastBook[0].title;
-    bookDiv.appendChild(bookTitle);
-
-    const bookAuthor = document.createElement('p');
-    bookAuthor.innerText = lastBook[0].author;
-    bookDiv.appendChild(bookAuthor);
-
-    const bookPages = document.createElement('p');
-    bookPages.innerText = lastBook[0].pages +' '+'pages';
-    bookDiv.appendChild(bookPages);
-
-    if(lastBook[0].read == true){
-        const bookRead  = document.createElement('button');
-        bookRead.innerText = 'Read';
-        bookRead.classList.add('reading');
-        bookDiv.appendChild(bookRead);
-
-    }else {
-        const bookRead  = document.createElement('button');
-        bookRead.innerText = 'Not read yet';
-        bookRead.classList.add('readingYet');
-        bookDiv.appendChild(bookRead);
-    }
-
-    const bookRemove = document.createElement('button');
-    bookRemove.innerText = 'Remove';
-    bookRemove.classList.add('remove');
-    bookDiv.appendChild(bookRemove);
-    // Then i push my new html attributs into the DOM:
-    bookGrid.appendChild(bookDiv);
-
+      // Creating new HTML attributs for display the new Book
+      // With CSS class
+      const bookDiv = document.createElement("div");
+      bookDiv.classList.add('gridBook');
+  
+      const bookTitle = document.createElement('p');
+      bookTitle.innerText = lastBook[0].title;
+      bookDiv.appendChild(bookTitle);
+  
+      const bookAuthor = document.createElement('p');
+      bookAuthor.innerText = lastBook[0].author;
+      bookDiv.appendChild(bookAuthor);
+  
+      const bookPages = document.createElement('p');
+      bookPages.innerText = lastBook[0].pages +' '+'pages';
+      bookDiv.appendChild(bookPages);
+  
+      if(lastBook[0].read == true){
+          const bookRead  = document.createElement('button');
+          bookRead.innerText = 'Read';
+          bookRead.classList.add('reading');
+          bookDiv.appendChild(bookRead);
+  
+      }else {
+          const bookRead  = document.createElement('button');
+          bookRead.innerText = 'Not read yet';
+          bookRead.classList.add('readingYet');
+          bookDiv.appendChild(bookRead);
+      }
+  
+      const bookRemove = document.createElement('button');
+      bookRemove.innerText = 'Remove';
+      bookRemove.classList.add('remove');
+      bookDiv.appendChild(bookRemove);
+      // Then i push my new html attributs into the DOM:
+      bookGrid.appendChild(bookDiv);
 }
 
 // Events
