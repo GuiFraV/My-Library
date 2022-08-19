@@ -12,17 +12,63 @@ const inputPages = document.querySelector('#pages');
 const inputCheck = document.querySelector('#check');
 const bookGrid = document.querySelector('.bookGrid');
 const book = document.querySelectorAll('.gridBook');
+const lightMode = document.querySelector('.shiftMode');
 
 // Logics
 function changeColor(){
-    a.style.color = 'black';
-    img.style.filter = 'none';
+    const shine = document.querySelector('.shiftMode p').innerHTML;
+    if(shine == 'Dark'){
+        a.style.color = 'black';
+        img.style.filter = 'none';
+    }else{
+        a.style.color = 'white';
+        img.style.filter = 'invert(99%) sepia(0%) saturate(7500%) hue-rotate(188deg) brightness(101%) contrast(101%)';
+    }   
 }
 
 function returnColor(){
-    a.style.color = 'white';
-    img.style.filter = 'invert(99%) sepia(0%) saturate(7500%) hue-rotate(188deg) brightness(101%) contrast(101%)';
+    const shine = document.querySelector('.shiftMode p').innerHTML;
+    if(shine == 'Dark'){
+        a.style.color = 'white';
+        img.style.filter = 'invert(99%) sepia(0%) saturate(7500%) hue-rotate(188deg) brightness(101%) contrast(101%)';
+    }else{
+        a.style.color = 'black';
+        img.style.filter = 'none';
+    }   
 }
+
+
+function light(){
+
+    let shine = this.firstElementChild.innerHTML;
+    const glow = document.querySelector('.glow-on-hover');
+
+    // We can make a ternary operator for one line
+    // shine == 'Dark' ? this.firstElementChild.innerHTML = 'Light':this.firstElementChild.innerHTML = 'Dark';
+
+    if(shine == 'Dark'){
+        this.firstElementChild.innerHTML = 'Light';
+        document.documentElement.style.setProperty('--white', '#140212');
+        document.documentElement.style.setProperty('--grey', '#121212');
+        document.documentElement.style.setProperty('--black', '#F0F0FA');
+        document.documentElement.style.setProperty('--shadow', 'rgba(255,255,255,0.16) 0px 1px 4px');
+        a.style.color = '#000000'; 
+        glow.style.color = "#ffffff";
+        img.style.filter = 'none';
+    }else {
+        this.firstElementChild.innerHTML = 'Dark';
+        document.documentElement.style.setProperty('--white', '#ffffff');
+        document.documentElement.style.setProperty('--grey', '#F0F0FA');
+        document.documentElement.style.setProperty('--black', '#000000');
+        document.documentElement.style.setProperty('--shadow', 'rgba(0, 0, 0, 0.16) 0px 1px 4px');
+        a.style.color = '#ffffff'; 
+        glow.style.color = "#000000";
+        img.style.filter = 'invert(99%) sepia(0%) saturate(7500%) hue-rotate(188deg) brightness(101%) contrast(101%)';
+    }
+
+
+}
+
 
 function openModal(){
     modal.style.display = 'flex';
@@ -154,6 +200,8 @@ button.addEventListener('click', closeModal);
 bookGrid.addEventListener('click', removeBook);
 bookGrid.addEventListener('click', buttonBook);
 modal.addEventListener('click', closeModalDiv);
+lightMode.addEventListener('click', light);
+
 
 // This is for load the 1st containt in my library :) : 
 window.addEventListener('DOMContentLoaded', ()=>{

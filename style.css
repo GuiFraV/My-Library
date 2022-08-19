@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: 0.5s;
 }
 
 :root{
@@ -11,6 +12,7 @@
     --blue: #646EEB;
     --grey: #F0F0FA;
     --white: #ffffff;
+    --black: #000000;
     --content-width: 80%;
     --content-width-xl: 90%;
     --radius: 7px;
@@ -34,6 +36,7 @@ body{
 h1{
     cursor: default;
     user-select:none;
+    color: var(--black);
 }
 
 /* Shift Mode Start */
@@ -41,23 +44,29 @@ h1{
     /* border: 1px solid black; */
     position :absolute;
     height: 40px;
-    width: 50px;
-    right: -5px;
+    width: 100px;
+    right: -30px;
     bottom: 10%;
     box-shadow: var(--shadow);
-    border-bottom-left-radius: 50%;
-    border-top-left-radius: 50%;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     cursor: pointer;
-    background-color: black;
+    background-color: var(--black);
 }
 
 .shiftMode p {
     font-size: 1em;
     font-weight: bold;
     color: var(--white);
+    margin-left: 20px;
+}
+
+.shiftMode:hover{
+    right: 0px;
+    transition: 0.5s
 }
 /* Shift Mode End */
 
@@ -75,15 +84,15 @@ h1{
     display: flex;
     align-items: center;
     cursor: pointer;
-    background: black;
+    background: var(--black);
     border-radius: 7px;
     padding: 5px;
-    border: 3px solid black;
+    border: 3px solid var(--black);
     transition: all 0.4s;
 }
 
 .container nav:hover{
-    background-color: white;
+    background-color: var(--white);
 }
 
 .container nav:active{
@@ -91,7 +100,7 @@ h1{
 }
 
 .container a{
-    color: var(--grey);
+    color: #F0F0FA;
     font-weight: bold;
     transition: all 0.4s;
     user-select:none;
@@ -174,7 +183,7 @@ h1{
     background: var(--grey);
     left: 0;
     top: 0;
-    border-radius: 13px;
+    border-radius: 9px;
 }
 
 @keyframes glowing {
@@ -200,6 +209,7 @@ h1{
 form h2{
     font-weight: 900;
     user-select:none;
+    color: var(--black);
 }
 
 .modalCard{
@@ -251,6 +261,7 @@ input[type='checkbox']{
 #read label{
     margin-right: 10px;
     user-select:none;
+    color: var(--black);
 }
 
 .modal button{
@@ -366,6 +377,10 @@ input[type='checkbox']{
     transition: 0.4s;
 }
 
+.gridBook p{
+    color: var(--black);
+}
+
 .gridBook p:first-child{
     font-weight: bold;
     text-decoration: underline;
@@ -382,6 +397,10 @@ footer{
     right: 0;
     text-align: center;
     bottom: -50px;
+}
+
+footer h3{
+    color: var(--black);
 }
 
 footer a {
