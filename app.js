@@ -145,7 +145,13 @@ function addBookToLibrary() {
     myLibrary.push(newbook);
 
     // Add book in localStorage
-    addBook({title, author, pages, read});
+    // addBook({title, author, pages, read});
+    // let bookyu = new booky(title, author, pages, read);
+    // bookyu.addBook(bookyu);
+    let newBooky = new booky();
+    console.log(newBooky)
+    newBooky.add(newbook);
+    newBooky.displayBookStorage;
     getBook();
 }
 

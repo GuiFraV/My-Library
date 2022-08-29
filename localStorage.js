@@ -1,110 +1,115 @@
-function saveBook(book){
-    localStorage.setItem('book', JSON.stringify(book));
-}
-
-function getBookStorage(){
-    let book = localStorage.getItem('book');
-    if(book == null){
-        return [];
-    }else{
-        return JSON.parse(book);
-    }
-}
-
-function addBook(tome){
-    let book = getBookStorage();
-    book.push(tome);
-    saveBook(book);
-}
-
-function removeBookStorage(tome){
-    let book = getBookStorage();
-    book = book.filter(b => b.title != tome.title);
-    saveBook(book);
-}
-
-
-function changeRead(tome){
-    let book = getBookStorage();
-    let findBook = book.find(b => b.title == tome.title);
-    if(findBook != undefined){
-        if(findBook.read == true){
-            findBook.read = false;
-            saveBook(book);
+class booky{
+    constructor(){
+        let book = localStorage.getItem('book');
+        if(book == null){
+            this.book = [];
         }else{
-            findBook.read = true;
-            saveBook(book);
+            this.book = JSON.parse(book);
+        }
+    }
+
+    save(){
+        localStorage.setItem('book', JSON.stringify(this.book));
+    }
+
+    add(tome){
+        this.book.push(tome);
+        this.save();
+    }
+
+    remove(tome){
+        this.book = this.book.filter(b => b.title != tome);
+        this.save();
+
+    }
+
+    changeRead(tome){
+        let findBook = this.book.find(b => b.title == tome);
+
+        if(findBook != undefined){
+
+            if(findBook.read == true){
+                findBook.read = false;
+                this.save();
+            }else{
+                findBook.read = true;
+                this.save();
+            }
+        }
+    }
+
+    events(event){
+        let e = event.target;
+
+        if(e.classList[0] == 'remove'){
+            let title = e.parentNode.firstChild.innerText;
+            let tome = this.book.find(b => b.title == title);
+            this.remove(tome.title);
+        } 
+        
+        if(e.classList[0] == 'reading'){
+            let title = e.parentNode.firstChild.innerText;
+            let tome = this.book.find(b => b.title == title);
+            this.changeRead(tome.title);
+        } else if (e.classList[0] == 'readingYet') {
+            let title = e.parentNode.firstChild.innerText;
+            let tome = this.book.find(b => b.title == title);
+            this.changeRead(tome.title);
+        }  
+    
+    }
+
+    displayBookStorage(){
+
+        for(let i = 0; i < this.book.length; i++){
+          // Creating new HTML attributs for display the new Book
+          // With CSS class
+          const bookDiv = document.createElement("div");
+          bookDiv.classList.add('gridBook');
+      
+          const bookTitle = document.createElement('p');
+          bookTitle.innerText = this.book[i].title;
+          bookDiv.appendChild(bookTitle);
+      
+          const bookAuthor = document.createElement('p');
+          bookAuthor.innerText = this.book[i].author;
+          bookDiv.appendChild(bookAuthor);
+      
+          const bookPages = document.createElement('p');
+          bookPages.innerText = this.book[i].pages +' '+'pages';
+          bookDiv.appendChild(bookPages);
+      
+          if(this.book[i].read == true){
+              const bookRead  = document.createElement('button');
+              bookRead.innerText = 'Read';
+              bookRead.classList.add('reading');
+              bookDiv.appendChild(bookRead);
+      
+          }else {
+              const bookRead  = document.createElement('button');
+              bookRead.innerText = 'Not read yet';
+              bookRead.classList.add('readingYet');
+              bookDiv.appendChild(bookRead);
+          }
+      
+          const bookRemove = document.createElement('button');
+          bookRemove.innerText = 'Remove';
+          bookRemove.classList.add('remove');
+          bookDiv.appendChild(bookRemove);
+          // Then i push my new html attributs into the DOM:
+          bookGrid.appendChild(bookDiv);
         }
     }
 }
 
-function events(event){
-    let e = event.target;
-    if(e.classList[0] == 'remove'){
-        let title = e.parentNode.firstChild.innerText;
-        let book = getBookStorage();
-        let tome = book.find(b => b.title == title);
-        removeBookStorage(tome);
-    } 
-    
-    if(e.classList[0] == 'reading'){
-        let title = e.parentNode.firstChild.innerText;
-        let book = getBookStorage();
-        let tome = book.find(b => b.title == title);
-        changeRead(tome);
-    } else if (e.classList[0] == 'readingYet') {
-        let title = e.parentNode.firstChild.innerText;
-        let book = getBookStorage();
-        let tome = book.find(b => b.title == title);
-        changeRead(tome);
-    }  
 
-}
+window.addEventListener('DOMContentLoaded', ()=> {
+    let book = new booky;
+    book.displayBookStorage();
+});
 
-function displayBookStorage(){
-    
-    let book = getBookStorage();
-
-    for(books of book){
-      // Creating new HTML attributs for display the new Book
-      // With CSS class
-      const bookDiv = document.createElement("div");
-      bookDiv.classList.add('gridBook');
-  
-      const bookTitle = document.createElement('p');
-      bookTitle.innerText = books.title;
-      bookDiv.appendChild(bookTitle);
-  
-      const bookAuthor = document.createElement('p');
-      bookAuthor.innerText = books.author;
-      bookDiv.appendChild(bookAuthor);
-  
-      const bookPages = document.createElement('p');
-      bookPages.innerText = books.pages +' '+'pages';
-      bookDiv.appendChild(bookPages);
-  
-      if(books.read == true){
-          const bookRead  = document.createElement('button');
-          bookRead.innerText = 'Read';
-          bookRead.classList.add('reading');
-          bookDiv.appendChild(bookRead);
-  
-      }else {
-          const bookRead  = document.createElement('button');
-          bookRead.innerText = 'Not read yet';
-          bookRead.classList.add('readingYet');
-          bookDiv.appendChild(bookRead);
-      }
-  
-      const bookRemove = document.createElement('button');
-      bookRemove.innerText = 'Remove';
-      bookRemove.classList.add('remove');
-      bookDiv.appendChild(bookRemove);
-      // Then i push my new html attributs into the DOM:
-      bookGrid.appendChild(bookDiv);
-    }
-}
-
-window.addEventListener('DOMContentLoaded', displayBookStorage);
-window.addEventListener('click', events);
+window.addEventListener('click', (event)=> {
+    let book = new booky;
+    book.events(event);
+});
 
