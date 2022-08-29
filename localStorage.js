@@ -20,14 +20,11 @@ class booky{
     remove(tome){
         this.book = this.book.filter(b => b.title != tome);
         this.save();
-
     }
 
     changeRead(tome){
         let findBook = this.book.find(b => b.title == tome);
-
         if(findBook != undefined){
-
             if(findBook.read == true){
                 findBook.read = false;
                 this.save();
@@ -46,11 +43,12 @@ class booky{
             let tome = this.book.find(b => b.title == title);
             this.remove(tome.title);
         } 
-        
+
         if(e.classList[0] == 'reading'){
             let title = e.parentNode.firstChild.innerText;
             let tome = this.book.find(b => b.title == title);
             this.changeRead(tome.title);
+
         } else if (e.classList[0] == 'readingYet') {
             let title = e.parentNode.firstChild.innerText;
             let tome = this.book.find(b => b.title == title);
